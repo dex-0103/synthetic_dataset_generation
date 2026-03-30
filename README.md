@@ -176,7 +176,7 @@ seaborn
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/synthetic-data-generation.git
+git clone https://github.com/dex-0103/synthetic-data-generation.git
 cd synthetic-data-generation
 
 # Create and activate a virtual environment
