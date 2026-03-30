@@ -63,10 +63,10 @@ synthetic-data-generation/
 ├── synthetic_diabetes_v2.csv           # Generated synthetic dataset
 ├── metadata_v2.json                    # CTGAN metadata file
 │
-├── dataset_loading_and_preprocessing.ipynb   # Day 1 & 2: EDA and preprocessing
-├── model_training.ipynb                      # Day 3: CTGAN training and generation
-├── data_validation.ipynb                     # Day 4: Statistical comparison
-├── model_evaluation.ipynb                    # Day 5: ML-based evaluation
+├── dataset_loading_and_preprocessing.ipynb   # EDA and preprocessing
+├── model_training.ipynb                      # CTGAN training and generation
+├── data_validation.ipynb                     # Statistical comparison
+├── model_evaluation.ipynb                    # ML-based evaluation
 │
 └── README.md
 ```
@@ -75,14 +75,14 @@ synthetic-data-generation/
 
 ## Pipeline
 
-### Day 1 — Dataset Exploration
+### Dataset Exploration
 
 - Loaded the PIMA Indians Diabetes dataset using Pandas
 - Reviewed dataset structure, shape, and data types
 - Identified data quality issues: zero values in `Glucose`, `BloodPressure`, `BMI`, `SkinThickness`, and `Insulin` that are medically unrealistic
 - Performed column-level analysis to understand feature distributions
 
-### Day 2 — Data Cleaning and Preprocessing
+### Data Cleaning and Preprocessing
 
 - Replaced unrealistic zero values in `Glucose`, `BloodPressure`, `BMI`, `SkinThickness`, and `Insulin` with `NaN`
 - Imputed missing values using column-wise **median** (robust to outliers in healthcare data)
@@ -92,7 +92,7 @@ synthetic-data-generation/
 
 > Note: Standard scaling was explored but intentionally omitted from the final pipeline to preserve original value ranges for CTGAN training.
 
-### Day 3 — Synthetic Data Generation with CTGAN
+### Synthetic Data Generation with CTGAN
 
 - Used the **SDV** library's `CTGANSynthesizer` model
 - Detected dataset metadata automatically using `SingleTableMetadata`
@@ -115,14 +115,14 @@ synthesizer.fit(df)
 synthetic_data = synthesizer.sample(num_rows=len(df))
 ```
 
-### Day 4 — Data Validation (Statistical Comparison)
+### Data Validation (Statistical Comparison)
 
 - Compared **mean** and **standard deviation** values for key features (`Glucose`, `BMI`, `Age`) between real and synthetic datasets
 - Plotted distribution histograms for `Glucose`, `BMI`, and `Age` to visually compare real vs. synthetic patterns
 - Generated **correlation heatmaps** for both datasets to verify that CTGAN preserved inter-feature relationships
 - Compared feature correlations with the `Outcome` variable to validate that predictive patterns were retained
 
-### Day 5 — Model Evaluation
+### Model Evaluation
 
 - Trained a **Random Forest Classifier** separately on real data and synthetic data (80/20 train-test split)
 - Evaluated both models using Accuracy, Precision, Recall, and F1 Score
@@ -194,16 +194,16 @@ pip install pandas numpy scikit-learn sdv matplotlib seaborn
 Run the notebooks in order:
 
 ```bash
-# Step 1 & 2: Load and preprocess the dataset
+# Load and preprocess the dataset
 jupyter notebook dataset_loading_and_preprocessing.ipynb
 
-# Step 3: Train CTGAN and generate synthetic data
+# Train CTGAN and generate synthetic data
 jupyter notebook model_training.ipynb
 
-# Step 4: Validate synthetic data statistically
+# Validate synthetic data statistically
 jupyter notebook data_validation.ipynb
 
-# Step 5: Evaluate using machine learning
+# Evaluate using machine learning
 jupyter notebook model_evaluation.ipynb
 ```
 
